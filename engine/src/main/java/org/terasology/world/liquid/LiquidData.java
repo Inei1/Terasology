@@ -25,41 +25,24 @@ import org.terasology.module.sandbox.API;
 @API
 public class LiquidData {
     public static final byte MAX_LIQUID_DEPTH = 0x07;
-    private static final byte LIQUID_DEPTH_FILTER = 0x07;
 
-    private LiquidType type;
     private byte depth;
 
     public LiquidData() {
-        type = LiquidType.WATER;
         depth = (byte) 0;
     }
 
-    public LiquidData(LiquidType type, byte depth) {
-        this.type = type;
+    public LiquidData(byte depth) {
         this.depth = depth;
     }
 
-    public LiquidData(LiquidType type, int depth) {
-        this.type = type;
-        this.depth = (byte) depth;
-    }
-
-    public LiquidData(byte rawData) {
-        this.type = LiquidType.getTypeForByte(rawData);
-        this.depth = (byte) (rawData & LIQUID_DEPTH_FILTER);
-    }
-
-    public LiquidType getType() {
-        return type;
-    }
 
     public byte getDepth() {
         return depth;
     }
 
     public byte toByte() {
-        return type.convertToByte(depth);
+        return depth;
     }
 
     @Override
@@ -69,9 +52,7 @@ public class LiquidData {
         }
         if (o instanceof LiquidData) {
             LiquidData other = (LiquidData) o;
-            if (depth == other.depth) {
-                return (depth == 0 || type == other.type);
-            }
+            return depth == other.depth || depth == 0;
         }
         return false;
     }
@@ -84,7 +65,7 @@ public class LiquidData {
     @Override
     public String toString() {
         if (depth > 0) {
-            return type + "(" + depth + ")";
+            return "Liquid depth: " + depth;
         }
         return "DRY";
     }
