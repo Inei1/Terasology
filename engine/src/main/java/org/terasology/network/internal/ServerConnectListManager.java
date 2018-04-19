@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 MovingBlocks
+ * Copyright 2017 MovingBlocks
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,6 +50,12 @@ public class ServerConnectListManager {
     public void loadLists() {
         //System.out.println(PathManager.getInstance().getInstallPath().resolve("terasology-server"));
         try {
+            if (!Files.exists(blacklistPath)) {
+                Files.createFile(blacklistPath);
+            }
+            if (!Files.exists(whitelistPath)) {
+                Files.createFile(whitelistPath);
+            }
             blacklistedIDs = gson.fromJson(Files.newBufferedReader(blacklistPath), Set.class);
             whitelistedIDs = gson.fromJson(Files.newBufferedReader(whitelistPath), Set.class);
         } catch (IOException e) {
