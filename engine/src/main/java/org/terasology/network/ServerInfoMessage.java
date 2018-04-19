@@ -19,8 +19,10 @@ package org.terasology.network;
 import org.terasology.naming.NameVersion;
 import org.terasology.world.internal.WorldInfo;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * TODO Type description
@@ -68,4 +70,20 @@ public interface ServerInfoMessage {
      * Get amount of online players from server
      */
     int getOnlinePlayersAmount();
+
+    /**
+     * Get the blacklist of the server
+     *
+     * @return the blacklist of the server put into a set
+     */
+
+    Set<String> getBlacklisted();
+
+    /**
+     * Get the whitelist of the server
+     *
+     * @return the whitelist of the server put into a set
+     */
+
+    Set<String> getWhitelisted();
 }

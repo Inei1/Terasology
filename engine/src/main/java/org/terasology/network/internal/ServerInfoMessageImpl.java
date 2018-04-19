@@ -19,7 +19,9 @@ package org.terasology.network.internal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import com.google.common.collect.Sets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.naming.Name;
@@ -132,6 +134,16 @@ class ServerInfoMessageImpl implements ServerInfoMessage {
         }
 
         return result;
+    }
+
+    @Override
+    public Set<String> getBlacklisted() {
+        return Sets.newHashSet(info.getBlackListList());
+    }
+
+    @Override
+    public Set<String> getWhitelisted() {
+        return Sets.newHashSet(info.getBlackListList());
     }
 
 }
